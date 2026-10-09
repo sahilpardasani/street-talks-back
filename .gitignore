@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+.venv/
+venv/
+*.egg-info/
+
+# Secrets — never commit credentials
+.env
+.env.*
+!.env.example
+*.config
+!*.config.example
+secrets.yaml
+secrets.*.yaml
+
+# Local / editor
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+.idea/
+.vscode/
+tmp/

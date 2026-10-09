@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Street Talks Back</title>
+<link rel="stylesheet" href="style.css?v=10">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <div class="mark"><img src="matchmaker-avatar.jpg?v=10" alt="Vehicle matchmaker" width="52" height="52"></div>
+    <div>
+      <h1>The Street Talks Back</h1>
+      <p>Street furniture watches the cameras, files a complaint with video proof, and escalates repeats. Start on <b>Live</b>.</p>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist">
+    <button data-view="live" class="active" role="tab">Live</button>
+    <button data-view="dashboard" role="tab">Dashboard</button>
+    <button data-view="complaints" role="tab">Complaints</button>
+    <button data-view="offenders" role="tab">Offenders</button>
+    <button data-view="matches" role="tab">Matches</button>
+    <button data-view="interview" role="tab">Interview</button>
+    <button data-view="search" role="tab">Search</button>
+  </nav>
+  <div class="status" id="status">connecting…</div>
+</header>
+
+<main>
+  <!-- LIVE -->
+  <section id="view-live" class="view active">
+    <ol class="howto">
+      <li><b>1</b> Bike-cam is selected. Press <b>Go live</b>.</li>
+      <li><b>2</b> Complaints land on the right as the bike lane watches. Click one for proof.</li>
+      <li><b>3</b> Then: <button type="button" class="link" data-goto="offenders">Offenders → ticket</button> · <button type="button" class="link" data-goto="search">Search</button> · <button type="button" class="link" data-goto="interview">Interview</button> · <button type="button" class="link" data-goto="matches">Matches</button></li>
+    </ol>
+    <div class="live-grid">
+      <div class="panel player">
+        <div class="panel-head">
+          <div>
+            <label>Camera</label>
+            <select id="live-camera"></select>
+          </div>
+          <div>
+            <label>Speed</label>
+            <select id="live-speed">
+              <option value="1">1× real time</option>
+              <option value="2" selected>2×</option>
+              <option value="4">4×</option>
+            </select>
+          </div>
+          <button id="live-start" class="primary">▶ Go live</button>
+          <button id="live-stop">■ Stop</button>
+        </div>
+        <video id="live-video" autoplay muted playsinline></video>
+        <div class="now" id="live-now">
+          <div class="muted">Pick a camera and press Go live. Segments replay in order; the persona judges each one as it arrives.</div>
+        </div>
+      </div>
+      <div class="panel feed">
+        <div class="panel-head"><h2>Complaint feed</h2><span class="pill" id="live-counter">0 filed</span></div>
+        <div id="live-feed" class="feed-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="view-dashboard" class="view">
+    <p class="lede">Totals from the already-judged archive. Click a persona to jump to their complaints. Tickets at the bottom are the action the agent takes.</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="dash-grid">
+      <div class="panel"><div class="panel-head"><h2>Who is complaining</h2></div><div id="dash-personas" class="persona-list"></div></div>
+      <div class="panel"><div class="panel-head"><h2>What they see</h2></div><div id="dash-types" class="bars"></div></div>
+      <div class="panel"><div class="panel-head"><h2>Severity</h2></div><div id="dash-severity" class="bars"></div></div>
+      <div class="panel"><div class="panel-head"><h2>Scan</h2><button id="scan-start" class="small">Scan archive</button></div><div id="dash-scan"></div></div>
+      <div class="panel wide"><div class="panel-head"><h2>Tickets filed</h2></div><div id="dash-tickets" class="ticket-list"></div></div>
+    </div>
+  </section>
+
+  <!-- COMPLAINTS -->
+  <section id="view-complaints" class="view">
+    <p class="lede">Every card is a filed complaint. Hover the clip to play it. Click for the 5-second before / moment / after, the caption quote, and YOLO counts.</p>
+    <div class="filters">
+      <select id="f-persona"><option value="">All personas</option></select>
+      <select id="f-type"><option value="">All violation types</option></select>
+      <select id="f-sev"><option value="">Any severity</option><option value="3">Severity ≥ 3</option><option value="4">Severity ≥ 4</option><option value="5">Severity 5</option></select>
+      <span class="muted" id="f-count"></span>
+    </div>
+    <div id="complaints-list" class="cards"></div>
+  </section>
+
+  <!-- OFFENDERS -->
+  <section id="view-offenders" class="view">
+    <p class="lede">Same vehicle, same persona, again and again. 3 strikes → formal. 6 → ticket. Escalate drafts a 311 request from the evidence clips only. Match briefing is the dating-profile view of that pair.</p>
+    <div id="offenders-list" class="offenders"></div>
+  </section>
+
+  <!-- MATCHES (vehicle dating briefings) -->
+  <section id="view-matches" class="view">
+    <div class="mascot-row">
+      <img class="mascot" src="matchmaker-avatar.jpg?v=10" alt="Vehicle matchmaker mascot" width="132" height="132">
+      <p class="lede">Your matchmaker. Cute, sarcastic, a little mean. She rewatches the clips and talks through the briefing like a gossip-club president — how they look, what they do, and who they'd be on a date. No racist nicknames. Ever.</p>
+    </div>
+    <div id="matches-list" class="matches"></div>
+  </section>
+
+  <!-- INTERVIEW -->
+  <section id="view-interview" class="view">
+    <div class="panel">
+      <div class="panel-head"><h2>Interview a persona</h2><span class="muted">Ask what happened. Answer is grounded in search + the persona's own complaint ledger. ~5 s.</span></div>
+      <div class="interview-form">
+        <select id="iv-persona"></select>
+        <input id="iv-question" placeholder="What happened on your corner tonight?" />
+        <button id="iv-ask" class="primary">Ask</button>
+      </div>
+      <div class="chips" id="iv-chips"></div>
+      <div id="iv-answer"></div>
+    </div>
+  </section>
+
+  <!-- SEARCH -->
+  <section id="view-search" class="view">
+    <div class="panel">
+      <div class="panel-head"><h2>Search hours of footage in plain language</h2><span class="muted">Hybrid search over Cosmos Embed + captions. Hover a clip to play.</span></div>
+      <div class="interview-form">
+        <select id="s-persona"><option value="">Everywhere</option></select>
+        <input id="s-q" placeholder="truck parked in the bike lane at night" />
+        <button id="s-go" class="primary">Search</button>
+      </div>
+      <div class="chips" id="s-chips"></div>
+      <div id="s-results" class="cards"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- DETAIL MODAL -->
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <button class="close" id="modal-close">×</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script src="app.js?v=13"></script>
+</body>
+</html>

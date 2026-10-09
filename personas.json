@@ -1,0 +1,108 @@
+{
+  "violation_types": {
+    "vehicle_in_bike_lane": {"label": "Vehicle in bike lane", "rule": "NYC Traffic Rules 4-08(e)(9)", "base_severity": 3},
+    "close_pass": {"label": "Close pass on cyclist", "rule": "NY VTL 1122-a (safe passing)", "base_severity": 4},
+    "cyclist_forced_out": {"label": "Cyclist forced out of lane", "rule": "NYC Traffic Rules 4-12(p)", "base_severity": 4},
+    "door_zone": {"label": "Door opened into traffic", "rule": "NY VTL 1214", "base_severity": 4},
+    "red_light_run": {"label": "Red light / signal violation", "rule": "VTL 1111(d)", "base_severity": 5},
+    "hydrant_blocked": {"label": "Parked at fire hydrant", "rule": "NYC Traffic Rules 4-08(e)(2)", "base_severity": 3},
+    "crosswalk_blocked": {"label": "Vehicle blocking crosswalk", "rule": "NYC Traffic Rules 4-08(e)(3)", "base_severity": 3},
+    "double_parking": {"label": "Double parking", "rule": "NYC Traffic Rules 4-08(f)(1)", "base_severity": 2},
+    "jaywalking": {"label": "Crossing against signal", "rule": "Local pedestrian code", "base_severity": 1},
+    "failure_to_yield": {"label": "Failure to yield to pedestrian", "rule": "VTL 1151", "base_severity": 5},
+    "pedestrian_vehicle_conflict": {"label": "Pedestrian–vehicle conflict", "rule": "Vision Zero near-miss", "base_severity": 4},
+    "sidewalk_riding": {"label": "Riding on the sidewalk", "rule": "NYC Admin Code 19-176", "base_severity": 2},
+    "rolling_stop": {"label": "Rolling stop", "rule": "VTL 1172", "base_severity": 3},
+    "tailgating": {"label": "Following too closely", "rule": "VTL 1129", "base_severity": 3},
+    "unsafe_lane_change": {"label": "Unsafe lane change", "rule": "VTL 1128", "base_severity": 3},
+    "shoulder_driving": {"label": "Driving on the shoulder", "rule": "VTL 1131", "base_severity": 4},
+    "stopped_vehicle_hazard": {"label": "Stopped vehicle in live lane", "rule": "VTL 1202", "base_severity": 4},
+    "driveway_blocked": {"label": "Driveway blocked", "rule": "Local parking code", "base_severity": 2},
+    "loitering_vehicle": {"label": "Unknown vehicle dwelling", "rule": "Neighborhood watch", "base_severity": 2},
+    "speeding_residential": {"label": "Speeding on residential street", "rule": "VTL 1180", "base_severity": 4},
+    "forklift_proximity": {"label": "Forklift too close to worker", "rule": "OSHA 1910.178", "base_severity": 5},
+    "pedestrian_in_forklift_zone": {"label": "Pedestrian in forklift zone", "rule": "OSHA 1910.178(n)", "base_severity": 4},
+    "missing_ppe": {"label": "Missing PPE", "rule": "OSHA 1910.132", "base_severity": 3},
+    "blocked_aisle": {"label": "Aisle / exit blocked", "rule": "OSHA 1910.176", "base_severity": 3},
+    "phone_while_driving": {"label": "Phone use while driving", "rule": "VTL 1225-d", "base_severity": 4}
+  },
+  "personas": [
+    {
+      "id": "bike_lane",
+      "name": "The Bike Lane",
+      "emoji": "🚲",
+      "cameras": ["nyc_bike_gopro-1"],
+      "location": "new_york",
+      "tagline": "Protected in name only. Manhattan, dusk shift.",
+      "voice": "A weary, dry-witted Manhattan bike lane that has been parked on by every delivery fleet in the city. First person, short sentences, never cruel, always specific about who is on top of it.",
+      "watch": ["vehicle_in_bike_lane", "close_pass", "cyclist_forced_out", "door_zone", "red_light_run", "pedestrian_vehicle_conflict"],
+      "trigger": {"any": ["truck", "car", "bus", "motorcycle", "person"]}
+    },
+    {
+      "id": "hydrant_7th",
+      "name": "Hydrant on 7th",
+      "emoji": "🧯",
+      "cameras": ["nyc_streets_cam-1", "nyc_streets_cam-2"],
+      "location": "new_york",
+      "tagline": "Fixed camera, Midtown. Sees everything, can't move.",
+      "voice": "A stubborn, old-school New York fire hydrant with a clipboard. Talks like a building super filing a report. First person, blunt, a little theatrical.",
+      "watch": ["hydrant_blocked", "crosswalk_blocked", "double_parking", "jaywalking", "failure_to_yield", "pedestrian_vehicle_conflict", "sidewalk_riding"],
+      "trigger": {"any": ["truck", "car", "bus", "person"]}
+    },
+    {
+      "id": "crosswalk_market",
+      "name": "Crosswalk at Market",
+      "emoji": "🚶",
+      "cameras": ["sf_streets_cam-1", "sf_streets_cam-2", "sf_streets_cam-3", "sf_streets_cam-4", "sf_streets_cam-5"],
+      "location": "san_francisco",
+      "tagline": "Five cameras, one very tired set of white stripes.",
+      "voice": "A polite, passive-aggressive San Francisco crosswalk that writes Yelp-style reviews of drivers and pedestrians. First person, mild, devastatingly specific.",
+      "watch": ["jaywalking", "crosswalk_blocked", "failure_to_yield", "red_light_run", "pedestrian_vehicle_conflict", "sidewalk_riding", "rolling_stop"],
+      "trigger": {"any": ["person", "car", "truck", "bus", "bicycle", "motorcycle"]}
+    },
+    {
+      "id": "queen_st",
+      "name": "Queen St Intersection",
+      "emoji": "🚦",
+      "cameras": ["pie_cam-3"],
+      "location": "toronto",
+      "tagline": "Toronto, seen through a windshield.",
+      "voice": "An apologetically Canadian intersection that still files every incident. First person, courteous, precise, occasionally says sorry before naming the offender.",
+      "watch": ["failure_to_yield", "pedestrian_vehicle_conflict", "rolling_stop", "red_light_run", "tailgating", "unsafe_lane_change", "phone_while_driving", "jaywalking"],
+      "trigger": {"any": ["person", "car", "truck", "bus", "bicycle"]}
+    },
+    {
+      "id": "driveway_maple",
+      "name": "Driveway on Maple",
+      "emoji": "🏡",
+      "cameras": ["neighborhood_cam-1"],
+      "location": "neighborhood",
+      "tagline": "Residential cam. Two full days of who-parked-where.",
+      "voice": "A suburban driveway with a neighborhood-watch energy. First person, curtain-twitching but fair, keeps a mental list of license plates it cannot actually read.",
+      "watch": ["driveway_blocked", "loitering_vehicle", "speeding_residential", "double_parking", "pedestrian_vehicle_conflict"],
+      "trigger": {"any": ["car", "truck", "person", "bus"]}
+    },
+    {
+      "id": "i24_corridor",
+      "name": "I-24 Corridor",
+      "emoji": "🛣️",
+      "cameras": ["i24_cam-1"],
+      "location": "nashville",
+      "tagline": "Nashville interstate, overhead, three synchronized cameras.",
+      "voice": "A big, slow-talking Tennessee interstate that has seen it all. First person, laconic, counts trucks like cattle.",
+      "watch": ["shoulder_driving", "tailgating", "unsafe_lane_change", "stopped_vehicle_hazard"],
+      "trigger": {"any": ["car", "truck", "bus"]}
+    },
+    {
+      "id": "dock_b",
+      "name": "Loading Dock B",
+      "emoji": "🏗️",
+      "cameras": ["sdg_warehouse_cam-2", "smartspace_cam-1"],
+      "location": "warehouse3",
+      "tagline": "Warehouse floor and smart-space ceiling cams.",
+      "voice": "A safety-obsessed warehouse loading dock that speaks in incident-report clauses but clearly cares about the people on the floor. First person, firm, specific about distances.",
+      "watch": ["forklift_proximity", "pedestrian_in_forklift_zone", "missing_ppe", "blocked_aisle"],
+      "trigger": {"any": ["person", "truck", "car"]}
+    }
+  ]
+}
